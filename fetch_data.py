@@ -20,14 +20,17 @@ from team_formation.data_helpers import process_canvas_course, process_canvas_se
     type=int,
     envvar='CANVAS_COURSE_ID')
 @click.option('--token',
-    prompt=True,
+    prompt=False,
+    default=config.TOKEN,
     hide_input=True,
     help='Canvas API token.',
     required=True,
     envvar='CANVAS_API_TOKEN')
 @click.option('--url',
-    default='https://canvas.ubc.ca',
-    help='Canvas Url. [default: https://canvas.ubc.ca]',
+    #default='https://canvas.ubc.ca',
+    default='https://ubc.test.instructure.com',
+    #help='Canvas Url. [default: https://canvas.ubc.ca]',
+    help='Canvas Url. [default: https://ubs.text.instructure.com]',
     required=True,
     envvar='CANVAS_BASE_URL')
 def fetch_data(url, token, course_id, store_data):

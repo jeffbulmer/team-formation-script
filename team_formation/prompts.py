@@ -8,7 +8,7 @@ from team_formation.data_helpers import process_canvas_courses, \
 
 def course_prompt(canvas):
     courses = canvas.get_courses(
-        enrollment_type='teacher',
+        #enrollment_type='teacher',
         enrollment_state='active',
         per_page=config.PER_PAGE,
         include=['sections', 'total_students']

@@ -45,14 +45,17 @@ from team_formation.data_helpers import store_teams_generated
     type=int,
     envvar='CANVAS_COURSE_ID')
 @click.option('--token',
-    prompt=True,
+    # prompt=True,
+    default = config.TOKEN,
     hide_input=True,
     help='Canvas API token.',
     required=True,
     envvar='CANVAS_API_TOKEN')
 @click.option('--url',
-    default='https://canvas.ubc.ca',
-    help='Canvas Url. [default: https://canvas.ubc.ca]',
+    # default='https://canvas.ubc.ca',
+    default='https://ubc.test.instructure.com',
+    # help='Canvas Url. [default: https://canvas.ubc.ca]',
+    help='Canvas Url. [default: https://ubs.text.instructure.com]',
     required=True,
     envvar='CANVAS_BASE_URL')
 def form_teams(url, token, course_id, group_all_sections, group_category_name,

@@ -6,3 +6,5 @@ PER_PAGE = 10
 STRATEGIES = ['random']
 STORE_DATA_LOCALLY = False
 SCRIPT_CURRENT_TIME = datetime.datetime.now()
+tokenloc = "token.txt"
+TOKEN = open(tokenloc).read(71).strip()
