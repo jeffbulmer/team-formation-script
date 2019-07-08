@@ -27,10 +27,10 @@ from team_formation.data_helpers import process_canvas_course, process_canvas_se
     required=True,
     envvar='CANVAS_API_TOKEN')
 @click.option('--url',
-    #default='https://canvas.ubc.ca',
-    default='https://ubc.test.instructure.com',
-    #help='Canvas Url. [default: https://canvas.ubc.ca]',
-    help='Canvas Url. [default: https://ubs.text.instructure.com]',
+    default='https://canvas.ubc.ca',
+    # default='https://ubc.test.instructure.com',
+    help='Canvas Url. [default: https://canvas.ubc.ca]',
+    # help='Canvas Url. [default: https://ubc.test.instructure.com]',
     required=True,
     envvar='CANVAS_BASE_URL')
 def fetch_data(url, token, course_id, store_data):
@@ -54,6 +54,13 @@ def _fetch_data(url, token, course_id):
 
     students = course.get_users(enrollment_type=['student'], enrollment_stat=['active'], per_page=config.PER_PAGE)
     data['students_df'] = process_canvas_students(students)
+
+    modules = course.get_modules()
+    for module in modules:
+        module_items =module.get_module_items()
+        module_items = [module_item for module_item in module_items]
+        for mi in module_items:
+            print(mi)
 
     return (course, data)
 

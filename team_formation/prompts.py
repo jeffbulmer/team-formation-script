@@ -3,8 +3,7 @@ import sys
 import click
 
 from team_formation import config
-from team_formation.data_helpers import process_canvas_courses, \
-    process_canvas_group_categories
+from team_formation.data_helpers import process_canvas_courses, process_canvas_group_categories
 
 def course_prompt(canvas):
     courses = canvas.get_courses(
