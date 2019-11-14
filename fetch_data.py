@@ -64,5 +64,27 @@ def _fetch_data(url, token, course_id):
 
     return (course, data)
 
+def fetch_student_survey_data(course, student_id, quiz_id):
+    survey = course.get_quiz(quiz_id)
+    students = course.get_users(enrollment_state=['active']);
+    student = None;
+    for s in students:
+        if(s.id == student_id):
+            student = s;
+            break
+    submissions = survey.get_submissions()
+    submission = None
+    for x in submissions:
+        if(x.user_id == student_id):
+            submission = x
+            break;
+    q_data=[]
+    for y in submission.get_submission_events():
+        if(y.event_type == 'question_answered'):
+            q_data += y.event_data
+
+    return {'student_id':student_id, 'quiz_id':quiz_id, 'quiz_data': q_data}
+
+
 if __name__ == '__main__':
     fetch_data()
