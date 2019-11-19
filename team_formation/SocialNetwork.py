@@ -45,6 +45,15 @@ class SocialNet:
             labels.append(s.getName())
         return labels
 
+    def balanceNetwork(self, socialNetwork):
+        names = self._labels;
+        for k in range(len(names)):
+            for i in range(len(socialNetwork[names[k]])):
+                if(socialNetwork[names[k]][i] != socialNetwork[names[i]][k]):
+                    socialNetwork[names[k]][i] = max(socialNetwork[names[k]][i], socialNetwork[names[i]][k])
+                    socialNetwork[names[i]][k] = max(socialNetwork[names[k]][i], socialNetwork[names[i]][k])
+
+        return socialNetwork
 
 
 
