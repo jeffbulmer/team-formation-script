@@ -1,4 +1,4 @@
-from SocialNetwork import SocialNet
+from SocialNetwork import SocialNet as SocialNet
 
 class FASTT:
     """
@@ -17,4 +17,4 @@ class FASTT:
     def __init__(self, projects, employees):
         self.n = projects
         self.o = employees
-        #self.g = 
+        self.g = SocialNet(o, True)
