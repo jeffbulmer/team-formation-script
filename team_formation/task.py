@@ -17,7 +17,7 @@ class Task:
     _name="";
     _reqs=[];
 
-    def __init__(self, name, reqs):
+    def __init__(self, name="Groupwork", reqs=[]):
         self._name = name
         self._reqs = reqs
 

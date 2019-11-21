@@ -1,13 +1,11 @@
 # -*- coding: utf-8 -*-
-import requests
 import canvasapi
 import click
-import pandas
-
 from team_formation import config
-from team_formation.prompts import course_prompt
 from team_formation.data_helpers import process_canvas_course, process_canvas_sections, \
     process_canvas_students
+from team_formation.prompts import course_prompt
+
 
 @click.command()
 @click.option('--store_data',
@@ -79,11 +77,25 @@ def fetch_student_survey_data(course, student_id, quiz_id):
             submission = x
             break;
     q_data=[]
+    if(submission is None):
+        return None
     for y in submission.get_submission_events():
         if(y.event_type == 'question_answered'):
             q_data += y.event_data
 
-    return {'student_id':student_id, 'quiz_id':quiz_id, 'quiz_data': q_data}
+    read_data = [];
+    for z in q_data:
+        # print(z);
+        q = survey.get_question(int(z['quiz_question_id'])).question_text
+        for a in survey.get_question(int(z['quiz_question_id'])).answers:
+            if z['answer'] is not None and a['id'] == int(z['answer']):
+                # print({'Question':q,'Answer':a['text']})
+                read_data.append({'Question':q,'Answer':a['text']});
+                break;
+
+    return {'student_name':student.name, 'title':survey.title, 'answers': read_data}
+
+# def fetch_all_survey_data(course, quiz_id):
 
 
 if __name__ == '__main__':
