@@ -1,5 +1,8 @@
 *.py[cod]
 
+# For Angie's translation
+*.java
+
 # data folder
 .data
 
