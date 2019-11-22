@@ -93,7 +93,7 @@ def fetch_student_survey_data(course, student_id, quiz_id):
                 read_data.append({'Question':q,'Answer':a['text']});
                 break;
 
-    return {'student_name':student.name, 'title':survey.title, 'answers': read_data}
+    return {'student_name':student.name, 'quiz':survey.title, 'answers': read_data}
 
 # def fetch_all_survey_data(course, quiz_id):
 

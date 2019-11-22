@@ -21,6 +21,9 @@ class Task:
         self._name = name
         self._reqs = reqs
 
+    def get_requirements(self):
+        return self._reqs
+
     def check_cover(self, team):
         """
         Checks how many requirements of a task are met by a group, i.e 
