@@ -2,6 +2,7 @@
 
 # For Angie's translation
 *.java
+*.vscode
 
 # data folder
 .data
