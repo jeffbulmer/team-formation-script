@@ -88,12 +88,21 @@ def fetch_student_survey_data(course, student_id, quiz_id):
         # print(z);
         q = survey.get_question(int(z['quiz_question_id'])).question_text
         for a in survey.get_question(int(z['quiz_question_id'])).answers:
-            if z['answer'] is not None and a['id'] == int(z['answer']):
+            #handle multiple dropdowns separately
+            if type(z['answer']) is dict:
+                for e in z['answer']:
+                    if z['answer'][e] is None:
+                        continue;
+            elif z['answer'] is not None and a['id'] == int(z['answer']):
                 # print({'Question':q,'Answer':a['text']})
                 read_data.append({'Question':q,'Answer':a['text']});
                 break;
 
-    return {'student_name':student.name, 'quiz':survey.title, 'answers': read_data}
+    if(student is None):
+        name = "Test"
+    else:
+        name = student.name
+    return {'student_name':name, 'quiz':survey.title, 'answers': read_data}
 
 # def fetch_all_survey_data(course, quiz_id):
 

@@ -40,8 +40,8 @@ class FASTT:
                     current_skills = list(set(current_skills) & set(member.getSkills()))
             for student in self._o:
                 usefulness = len(set(student.getSkills()) & (set(project.get_requirements())-set(current_skills)))
-                d = diameter(self._teams[i], student)
-                old_d = diameter(self._teams[i])
+                d = self.diameter(self._teams[i], student)
+                old_d = self.diameter(self._teams[i])
                 if(d == 0 or d == old_d):
                     utility.append(usefulness)
                 else:
@@ -49,10 +49,39 @@ class FASTT:
             all_utilities.append(utility)
         return(all_utilities)
 
-
     def diameter(self, team, student=None):
+        """
+               Checks the diameter of a team as defined in Lappas et al. (2012)
+               If a student is specified, the resulting diameter will be the diameter of the team
+               after that student has been added. If no student is specified, then the diameter of
+               the current team is returned.
+
+               Parameters
+               ----------
+               team : list
+                   A list of Student objects.
+               student: Student
+                   A single student to be added to a team.
+                   Optional parameter
+
+               Returns
+               -------
+               diameter : int
+                   An integer representing the total edge weight of the
+                   longest shortest path between any two individuals in the team
+        """
         if(team is None):
             return 0
+        elif(student is None):
+            sn = SocialNet(team, True)
+            diameter = sn.check_diameter()
+            return diameter
+        else:
+            temp_team = team;
+            temp_team.append(student)
+            sn = SocialNet(temp_team, True)
+            diameter = sn.check_diameter()
+            return diameter
 
     def check_distance(self, team, verbose):
         sn = SocialNet(team, True)
